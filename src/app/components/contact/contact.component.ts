@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-  formData = {
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  };
+  contactForm: FormGroup;
+  isSubmitting = false;
+  submitSuccess = false;
+  submitError = false;
 
   contactInfo = {
     email: 'lingalasuresh0606@gmail.com',
@@ -33,13 +32,20 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  private submitted = false;
-  private loading = false;
-  private hasError = false;
-
-  constructor(private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.contactForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      subject: ['', [Validators.required, Validators.minLength(5)]],
+      message: ['', [Validators.required, Validators.minLength(10)]]
+    });
+  }
 
   ngOnInit(): void {
+    // Reset form state when component initializes
+    this.submitSuccess = false;
+    this.submitError = false;
+
     // Add animation classes after component is mounted
     setTimeout(() => {
       const elements = document.querySelectorAll('.fade-in');
@@ -47,16 +53,58 @@ export class ContactComponent implements OnInit {
     }, 100);
   }
 
+  onSubmit(): void {
+    if (this.contactForm.valid) {
+      this.isSubmitting = true;
+      this.submitSuccess = false;
+      this.submitError = false;
+
+      // Simulate form submission
+      setTimeout(() => {
+        console.log('Form submitted:', this.contactForm.value);
+        this.isSubmitting = false;
+        this.submitSuccess = true;
+        this.contactForm.reset();
+      }, 1500);
+    } else {
+      // Mark all fields as touched to trigger validation messages
+      Object.keys(this.contactForm.controls).forEach(key => {
+        const control = this.contactForm.get(key);
+        control?.markAsTouched();
+      });
+    }
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.contactForm.get(controlName);
+    if (control?.hasError('required')) {
+      return 'This field is required';
+    }
+    if (control?.hasError('email')) {
+      return 'Please enter a valid email address';
+    }
+    if (control?.hasError('minlength')) {
+      const requiredLength = control.errors?.['minlength'].requiredLength;
+      return `This field must be at least ${requiredLength} characters long`;
+    }
+    return '';
+  }
+
+  isFieldInvalid(controlName: string): boolean {
+    const control = this.contactForm.get(controlName);
+    return control ? control.invalid && (control.dirty || control.touched) : false;
+  }
+
   isFormLoading(): boolean {
-    return this.loading;
+    return this.isSubmitting;
   }
 
   isFormSubmitted(): boolean {
-    return this.submitted;
+    return this.submitSuccess;
   }
 
   hasFormError(): boolean {
-    return this.hasError;
+    return this.submitError;
   }
 
   isEmailValid(email: string): boolean {
@@ -64,41 +112,28 @@ export class ContactComponent implements OnInit {
     return emailPattern.test(email);
   }
 
-  async onSubmit(): Promise<void> {
-    this.hasError = false;
-    this.submitted = false;
-    
-    // Validate all fields
-    if (!this.formData.name.trim() || 
-        !this.formData.email.trim() || 
-        !this.formData.subject.trim() || 
-        !this.formData.message.trim() ||
-        !this.isEmailValid(this.formData.email)) {
-      this.hasError = true;
-      return;
-    }
+  async onSubmitForm(): Promise<void> {
+    if (this.contactForm.valid) {
+      this.isSubmitting = true;
+      this.submitSuccess = false;
+      this.submitError = false;
 
-    this.loading = true;
-
-    try {
-      await this.http.post('http://localhost:3000/api/email/send', this.formData).toPromise();
-      this.loading = false;
-      this.submitted = true;
-      
-      // Reset form after successful submission
-      setTimeout(() => {
-        this.formData = {
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        };
-        this.submitted = false;
-      }, 3000);
-    } catch (error) {
-      console.error('Error sending email:', error);
-      this.loading = false;
-      this.hasError = true;
+      try {
+        await this.http.post('http://localhost:3000/api/email/send', this.contactForm.value).toPromise();
+        this.isSubmitting = false;
+        this.submitSuccess = true;
+        this.contactForm.reset();
+      } catch (error) {
+        console.error('Error sending email:', error);
+        this.isSubmitting = false;
+        this.submitError = true;
+      }
+    } else {
+      // Mark all fields as touched to trigger validation messages
+      Object.keys(this.contactForm.controls).forEach(key => {
+        const control = this.contactForm.get(key);
+        control?.markAsTouched();
+      });
     }
   }
 } 
