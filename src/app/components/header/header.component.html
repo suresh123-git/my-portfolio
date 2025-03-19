@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a routerLink="/" class="logo">
+        <span class="logo-text">Suresh Lingala</span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" [class.active]="isMenuOpen" (click)="toggleMenu()">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" [class.active]="isMenuOpen">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+        <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
+        <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" (click)="toggleTheme()">
+        <i class="fas" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
+      </button>
+    </nav>
+  </div>
+</header> 

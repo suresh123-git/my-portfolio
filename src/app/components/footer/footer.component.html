@@ -1,0 +1,29 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <h3>Suresh Lingala</h3>
+      <p>Passionate MEAN Stack Developer creating innovative web solutions with modern technologies.</p>
+    </div>
+
+    <ul class="footer-links">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/about">About</a></li>
+      <li><a routerLink="/projects">Projects</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+    </ul>
+
+    <div class="social-links">
+      <a *ngFor="let link of socialLinks" 
+         [href]="link.url" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         [title]="link.icon.split(' ')[2]">
+        <i [class]="link.icon"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {{ currentYear }} Your Name. All rights reserved.</p>
+  </div>
+</footer> 

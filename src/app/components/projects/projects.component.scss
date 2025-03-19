@@ -1,0 +1,296 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// Variables
+$primary-color: #00ff9d;
+$secondary-color: #00b8ff;
+$text-color: #333;
+$bg-color: #fff;
+$section-bg: #f8f9fa;
+
+// Mixins
+@mixin section-padding {
+  padding: 5rem 0;
+}
+
+// Projects Section
+.projects {
+  padding: 5rem 0;
+  background: var(--bg-primary);
+
+  .projects-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .projects-header {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #00ff9d, #00b8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+  }
+
+  .projects-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid $primary-color;
+      border-radius: 30px;
+      background: transparent;
+      color: $text-color;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 255, 157, 0.1);
+      }
+
+      &.active {
+        background: linear-gradient(45deg, $primary-color, $secondary-color);
+        color: $text-color;
+        border-color: transparent;
+      }
+    }
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .project-card {
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover, &:active {
+      transform: translateY(-5px);
+    }
+
+    .project-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        touch-action: manipulation;
+
+        .project-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          padding: 1rem;
+
+          span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: white;
+          }
+        }
+      }
+
+      &:hover, &:active {
+        img {
+          transform: scale(1.1);
+        }
+
+        .project-overlay {
+          opacity: 1;
+        }
+      }
+    }
+
+    .project-content {
+      padding: 2rem;
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
+
+      .project-description {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .project-features {
+        margin-bottom: 1.5rem;
+
+        h4 {
+          font-size: 1.1rem;
+          font-weight: 500;
+          margin-bottom: 0.8rem;
+          color: var(--text-color);
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+
+            &:before {
+              content: "•";
+              color: #00ff9d;
+              position: absolute;
+              left: 0;
+            }
+          }
+        }
+      }
+
+      .project-actions {
+        .btn-primary {
+          width: 100%;
+          padding: 0.8rem;
+          background: linear-gradient(45deg, #00ff9d, #00b8ff);
+          color: var(--text-color);
+          border: none;
+          border-radius: 8px;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+
+          &:hover, &:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  .projects-cta {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(0, 255, 157, 0.1), rgba(0, 184, 255, 0.1));
+    border-radius: 15px;
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: $text-color;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, $primary-color, $secondary-color);
+      color: $text-color;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
+      }
+    }
+  }
+}
+
+// Animations
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .projects {
+    .projects-header {
+      .section-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Add touch-specific media query
+@media (hover: none) and (pointer: coarse) {
+  .project-card {
+    .project-image {
+      .project-overlay {
+        opacity: 0.9;
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &:active {
+      transform: translateY(-3px);
+    }
+
+    .project-actions {
+      .btn-primary {
+        &:active {
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+} 

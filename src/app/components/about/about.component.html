@@ -1,0 +1,138 @@
+<!-- About Section -->
+<section class="about-section fade-in">
+  <div class="container">
+    <div class="about-header">
+      <h1>About Me</h1>
+      <p class="subtitle">{{ aboutInfo.title }}</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-info">
+        <div class="bio-section">
+          <p>{{ aboutInfo.bio }}</p>
+        </div>
+
+        <div class="personal-info">
+          <h2>Personal Information</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <h3>Education</h3>
+              <p>{{ aboutInfo.personalInfo.education }}</p>
+              <p>{{ aboutInfo.personalInfo.university }} ({{ aboutInfo.personalInfo.graduationYear }})</p>
+            </div>
+            <div class="info-item">
+              <h3>Location</h3>
+              <p>{{ aboutInfo.location }}</p>
+            </div>
+            <div class="info-item">
+              <h3>Email</h3>
+              <p>{{ aboutInfo.email }}</p>
+            </div>
+            <div class="info-item">
+              <h3>Languages</h3>
+              <ul>
+                <li *ngFor="let language of aboutInfo.personalInfo.languages">{{ language }}</li>
+              </ul>
+            </div>
+            <div class="info-item">
+              <h3>Interests</h3>
+              <ul>
+                <li *ngFor="let interest of aboutInfo.personalInfo.interests">{{ interest }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="technical-skills fade-in">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-laptop-code"></i>
+              <h3>Frontend Development</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.frontend">
+                <span class="skill-name">{{ skill }}</span>
+                <div class="skill-level"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-server"></i>
+              <h3>Backend Development</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.backend">
+                <span class="skill-name">{{ skill }}</span>
+                <div class="skill-level"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-tools"></i>
+              <h3>Tools & Technologies</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.tools">
+                <span class="skill-name">{{ skill }}</span>
+                <div class="skill-level"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-sitemap"></i>
+              <h3>Methodologies</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.methodologies">
+                <span class="skill-name">{{ skill }}</span>
+                <div class="skill-level"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-section">
+        <h2>Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let exp of aboutInfo.experience">
+            <div class="timeline-header">
+              <h3>{{ exp.position }}</h3>
+              <span class="period">{{ exp.period }}</span>
+            </div>
+            <div class="company">{{ exp.company }}</div>
+            <p class="description">{{ exp.description }}</p>
+            <ul class="achievements">
+              <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="certifications-section">
+        <h2>Certifications</h2>
+        <div class="certifications-grid">
+          <div class="certification-item" *ngFor="let cert of aboutInfo.certifications">
+            <h3>{{ cert.name }}</h3>
+            <p>{{ cert.issuer }} ({{ cert.year }})</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Let's Work Together</h2>
+      <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+      <a routerLink="/contact" class="cta-button">Get in Touch</a>
+    </div>
+  </div>
+</section> 

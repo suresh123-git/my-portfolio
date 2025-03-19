@@ -1,0 +1,32 @@
+<!-- Blog List View -->
+<div class="blog-section">
+  <div class="blog-header">
+    <h2>Case Studies</h2>
+    <p>Explore our successful projects and technical solutions</p>
+  </div>
+
+  <div class="blog-grid" *ngIf="!selectedPost">
+    <div class="blog-card" *ngFor="let post of blogPosts">
+      <div class="card-image">
+        <img [src]="post.image" [alt]="post.title">
+      </div>
+      <div class="card-content">
+        <h3>{{ post.title }}</h3>
+        <p class="excerpt">{{ post.excerpt }}</p>
+        <div class="tags">
+          <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+        </div>
+        <button class="read-more" (click)="viewPost(post.id)">
+          Read Case Study
+          <span class="material-icons">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <app-case-study-detail 
+    *ngIf="selectedPost"
+    [caseStudy]="selectedPost"
+    [onBack]="backToList.bind(this)">
+  </app-case-study-detail>
+</div> 

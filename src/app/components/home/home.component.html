@@ -1,0 +1,95 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content fade-in">
+      <h1 class="hero-title">Hi, I'm <span class="highlight">{{ developerInfo.name }}</span></h1>
+      <h2 class="hero-subtitle">{{ developerInfo.title }}</h2>
+      <p class="hero-description">
+        {{ developerInfo.bio }}
+      </p>
+      <div class="hero-cta">
+        <a routerLink="/projects" class="btn btn-primary">View My Work</a>
+        <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
+      </div>
+      <div class="social-links">
+        <a [href]="developerInfo.github" target="_blank" rel="noopener noreferrer" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a [href]="developerInfo.linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills">
+  <div class="container">
+    <h2 class="section-title fade-in">Technical Skills</h2>
+    <div class="skills-grid">
+      <div *ngFor="let skill of developerInfo.skills; let i = index" class="skill-item fade-in" [style.animation-delay]="i * 0.1 + 's'">
+        <div class="skill-header">
+          <span class="skill-name">{{ skill.name }}</span>
+          <span class="skill-level">{{ skill.level }}%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" [style.width.%]="skill.level"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Projects Section -->
+<section class="projects">
+  <div class="container">
+    <h2 class="section-title fade-in">Recent Projects</h2>
+    <div class="projects-grid">
+      <div *ngFor="let project of developerInfo.recentProjects; let i = index" class="project-card fade-in" [style.animation-delay]="i * 0.2 + 's'">
+        <div class="project-image">
+          <img [src]="project.image" [alt]="project.title">
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-tech">
+            <span *ngFor="let tech of project.technologies">{{ tech }}</span>
+          </div>
+          <a [href]="project.link" class="btn btn-outline">View Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section class="experience">
+  <div class="container">
+    <h2 class="section-title fade-in">Experience</h2>
+    <div class="timeline">
+      <div *ngFor="let exp of developerInfo.experience; let i = index" class="timeline-item fade-in" [style.animation-delay]="i * 0.3 + 's'">
+        <div class="timeline-content">
+          <h3 class="timeline-title">{{ exp.position }}</h3>
+          <h4 class="timeline-company">{{ exp.company }}</h4>
+          <p class="timeline-period">{{ exp.period }}</p>
+          <p class="timeline-description">{{ exp.description }}</p>
+          <ul class="timeline-achievements" *ngIf="exp.achievements">
+            <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA Section -->
+<section class="contact-cta">
+  <div class="container">
+    <h2 class="section-title fade-in">Let's Work Together</h2>
+    <p class="cta-description fade-in">
+      I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+    </p>
+    <a routerLink="/contact" class="btn btn-primary fade-in">Get in Touch</a>
+  </div>
+</section> 

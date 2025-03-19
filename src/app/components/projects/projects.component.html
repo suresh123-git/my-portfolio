@@ -1,0 +1,42 @@
+<!-- Projects Section -->
+<section class="projects">
+  <div class="container">
+    <div class="projects-content">
+      <div class="projects-header fade-in">
+        <h1 class="section-title">My Projects</h1>
+        <p class="section-subtitle">A showcase of my work and technical expertise</p>
+      </div>
+
+      <div class="projects-grid">
+        <div *ngFor="let project of projects; let i = index" class="project-card fade-in" [style.animation-delay]="i * 0.2 + 's'">
+          <div class="project-image">
+            <img [src]="project.image" [alt]="project.title">
+            <div class="project-overlay">
+              <div class="project-tech">
+                <span *ngFor="let tech of project.technologies">{{ tech }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+            <div class="project-features">
+              <h4>Key Features:</h4>
+              <ul>
+                <li *ngFor="let feature of project.features">{{ feature }}</li>
+              </ul>
+            </div>
+            <div class="project-actions">
+              <a [href]="project.link" class="btn btn-primary">View Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-cta fade-in">
+        <p>Want to work together on your next project?</p>
+        <a routerLink="/contact" class="btn">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section> 
