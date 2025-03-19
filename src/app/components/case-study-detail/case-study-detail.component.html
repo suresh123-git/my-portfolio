@@ -1,0 +1,27 @@
+<div class="case-study-detail">
+  <div class="case-study-header">
+    <button class="back-button" (click)="handleBack()">
+      <span class="material-icons">arrow_back</span>
+      Back to Case Studies
+    </button>
+    <h1>{{ caseStudy.title }}</h1>
+    <div class="meta-info">
+      <span class="date">{{ caseStudy.date }}</span>
+      <span class="read-time">{{ caseStudy.readTime }} min read</span>
+      <div class="tags">
+        <span *ngFor="let tag of caseStudy.tags" class="tag">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-study-content">
+    <div class="article-content" [innerHTML]="getSafeHtml(caseStudy.content)"></div>
+  </div>
+
+  <div class="case-study-footer">
+    <button class="back-button" (click)="handleBack()">
+      <span class="material-icons">arrow_back</span>
+      Back to Case Studies
+    </button>
+  </div>
+</div>

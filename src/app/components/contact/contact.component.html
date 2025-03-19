@@ -1,0 +1,122 @@
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-header fade-in">
+      <h2>Get in Touch</h2>
+      <p>Have a question or want to work together? Let's connect!</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <div class="contact-form-container fade-in">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              formControlName="name"
+              [class.invalid]="isFieldInvalid('name')"
+              placeholder="Your name">
+            <div class="error-message" *ngIf="isFieldInvalid('name')">
+              {{ getErrorMessage('name') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              [class.invalid]="isFieldInvalid('email')"
+              placeholder="your.email@example.com">
+            <div class="error-message" *ngIf="isFieldInvalid('email')">
+              {{ getErrorMessage('email') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input 
+              type="text" 
+              id="subject" 
+              formControlName="subject"
+              [class.invalid]="isFieldInvalid('subject')"
+              placeholder="What's this about?">
+            <div class="error-message" *ngIf="isFieldInvalid('subject')">
+              {{ getErrorMessage('subject') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea 
+              id="message" 
+              formControlName="message"
+              [class.invalid]="isFieldInvalid('message')"
+              placeholder="Your message here..."></textarea>
+            <div class="error-message" *ngIf="isFieldInvalid('message')">
+              {{ getErrorMessage('message') }}
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            class="submit-btn"
+            [disabled]="isSubmitting || !contactForm.valid">
+            <span *ngIf="!isSubmitting">Send Message</span>
+            <span *ngIf="isSubmitting">Sending...</span>
+          </button>
+
+          <div class="form-message success" *ngIf="submitSuccess">
+            Message sent successfully! We'll get back to you soon.
+          </div>
+
+          <div class="form-message error" *ngIf="submitError">
+            Something went wrong. Please try again later.
+          </div>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info fade-in">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3>Location</h3>
+          <p>{{ contactInfo.location }}</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Email</h3>
+          <p>{{ contactInfo.email }}</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h3>Phone</h3>
+          <p>{{ contactInfo.phone }}</p>
+        </div>
+
+        <div class="social-links">
+          <a [href]="contactInfo.socialLinks.linkedin" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a [href]="contactInfo.socialLinks.github" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a [href]="contactInfo.socialLinks.twitter" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

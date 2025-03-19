@@ -1,0 +1,108 @@
+@use 'variables' as vars;
+
+// Media Queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "small" {
+    @media (max-width: vars.$breakpoint-sm) { @content; }
+  }
+  @else if $breakpoint == "medium" {
+    @media (max-width: vars.$breakpoint-md) { @content; }
+  }
+  @else if $breakpoint == "large" {
+    @media (max-width: vars.$breakpoint-lg) { @content; }
+  }
+  @else if $breakpoint == "xlarge" {
+    @media (max-width: vars.$breakpoint-xl) { @content; }
+  }
+}
+
+// Flexbox
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// Grid
+@mixin grid($columns: 1, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Typography
+@mixin heading($size, $weight: 700, $line-height: 1.2) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  margin-bottom: $spacing-md;
+}
+
+// Card
+@mixin card($padding: $spacing-lg) {
+  background-color: var(--card-bg);
+  border-radius: $border-radius-md;
+  padding: $padding;
+  box-shadow: var(--card-shadow);
+  transition: $transition-base;
+}
+
+// Button
+@mixin button($bg-color: var(--primary-color), $text-color: white) {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: $border-radius-sm;
+  text-decoration: none;
+  transition: $transition-base;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--primary-color-dark);
+  }
+}
+
+// Animation
+@mixin fade-in($duration: 0.6s) {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity $duration ease, transform $duration ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Container
+@mixin container($max-width: 1200px) {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+// List Reset
+@mixin list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Truncate Text
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+} 
