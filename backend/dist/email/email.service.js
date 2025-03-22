@@ -26,6 +26,7 @@ let EmailService = class EmailService {
     }
     async sendEmail(emailDto) {
         try {
+            console.log('djsghsdjghjsdh');
             const mailOptions = {
                 from: this.configService.get('EMAIL_USER'),
                 to: 'lingalasuresh0606@gmail.com',
@@ -39,6 +40,7 @@ let EmailService = class EmailService {
           <p>${emailDto.message}</p>
         `,
             };
+            console.log(mailOptions, 'asgjdsgjsdgj');
             await this.transporter.sendMail(mailOptions);
             return true;
         }

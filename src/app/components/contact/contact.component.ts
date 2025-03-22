@@ -18,21 +18,24 @@ export class ContactComponent implements OnInit {
   submitError = false;
 
   contactInfo = {
-    email: 'lingalasuresh0606@gmail.com',
-    location: 'Hyderabad, India',
-    phone: '+91 9876543210',
+    email: 'your.email@example.com',
+    location: 'Your Location',
+    phone: '+1 234 567 8900',
     availability: {
       days: 'Monday - Friday',
-      hours: '9:00 AM - 6:00 PM IST'
+      hours: '9:00 AM - 6:00 PM'
     },
     socialLinks: {
-      github: 'https://github.com/SureshLingala',
-      linkedin: 'https://linkedin.com/in/suresh-lingala',
-      twitter: 'https://twitter.com/SureshLingala'
+      github: 'https://github.com/yourusername',
+      linkedin: 'https://linkedin.com/in/yourusername',
+      twitter: 'https://twitter.com/yourusername'
     }
   };
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -49,7 +52,9 @@ export class ContactComponent implements OnInit {
     // Add animation classes after component is mounted
     setTimeout(() => {
       const elements = document.querySelectorAll('.fade-in');
-      elements.forEach(element => element.classList.add('visible'));
+      elements.forEach(element => {
+        element.classList.add('visible');
+      });
     }, 100);
   }
 
@@ -59,13 +64,24 @@ export class ContactComponent implements OnInit {
       this.submitSuccess = false;
       this.submitError = false;
 
-      // Simulate form submission
-      setTimeout(() => {
-        console.log('Form submitted:', this.contactForm.value);
-        this.isSubmitting = false;
-        this.submitSuccess = true;
-        this.contactForm.reset();
-      }, 1500);
+      // Get form data
+      const formData = this.contactForm.value;
+
+      // Send email using your backend API
+      this.http.post('http://localhost:3000/api/email/send', formData)
+        .subscribe({
+          next: (response) => {
+            console.log('Email sent successfully:', response);
+            this.isSubmitting = false;
+            this.submitSuccess = true;
+            this.contactForm.reset();
+          },
+          error: (error) => {
+            console.error('Error sending email:', error);
+            this.isSubmitting = false;
+            this.submitError = true;
+          }
+        });
     } else {
       // Mark all fields as touched to trigger validation messages
       Object.keys(this.contactForm.controls).forEach(key => {
@@ -119,6 +135,8 @@ export class ContactComponent implements OnInit {
       this.submitError = false;
 
       try {
+        console.log(this.contactForm.value,'djkghdjghdj');
+        
         await this.http.post('http://localhost:3000/api/email/send', this.contactForm.value).toPromise();
         this.isSubmitting = false;
         this.submitSuccess = true;
