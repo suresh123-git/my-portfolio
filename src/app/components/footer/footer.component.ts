@@ -15,6 +15,7 @@ export class FooterComponent {
   socialLinks = [
     { icon: 'fab fa-github', url: 'https://github.com/suresh123-git' },
     { icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/in/lingalasuresh' },
-    { icon: 'fab fa-twitter', url: 'https://x.com/LINGALASUR81209' }
+    { icon: 'fab fa-twitter', url: 'https://x.com/LINGALASUR81209' },
+    { icon: 'fas fa-envelope', url: 'mailto:lingalasuresh0606@gmail.com' }
   ];
 } 

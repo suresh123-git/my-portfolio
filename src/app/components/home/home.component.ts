@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   socialLinks = [
     { name: 'GitHub', url: 'https://github.com/suresh123-git', icon: 'fab fa-github' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/lingalasuresh', icon: 'fab fa-linkedin' },
-    { name: 'Twitter', url: 'https://x.com/LINGALASUR81209', icon: 'fab fa-twitter' }
+    { name: 'Twitter', url: 'https://x.com/LINGALASUR81209', icon: 'fab fa-twitter' },
+    { name: 'Gmail', url: 'mailto:lingalasuresh0606@gmail.com', icon: 'fas fa-envelope' }
   ];
 
   developerInfo = {
