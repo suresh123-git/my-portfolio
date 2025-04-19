@@ -86,3 +86,5 @@ export class ProjectDetailModalComponent {
   @Input() project: any;
   @Output() close = new EventEmitter<void>();
 } 
+
+// changes
