@@ -13,8 +13,8 @@ export class FooterComponent {
   currentYear = new Date().getFullYear();
   
   socialLinks = [
-    { icon: 'fab fa-github', url: 'https://github.com/SureshLingala' },
-    { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/suresh-lingala' },
-    { icon: 'fab fa-twitter', url: 'https://twitter.com/SureshLingala' }
+    { icon: 'fab fa-github', url: 'https://github.com/suresh123-git' },
+    { icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/in/lingalasuresh' },
+    { icon: 'fab fa-twitter', url: 'https://x.com/LINGALASUR81209' }
   ];
 } 

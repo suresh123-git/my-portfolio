@@ -18,17 +18,17 @@ export class ContactComponent implements OnInit {
   submitError = false;
 
   contactInfo = {
-    email: 'your.email@example.com',
-    location: 'Your Location',
-    phone: '+1 234 567 8900',
+    email: 'lingalasuresh0606@gmail.com',
+    location: 'Hyderabad, India',
+    phone: '+91 7981570771',
     availability: {
       days: 'Monday - Friday',
       hours: '9:00 AM - 6:00 PM'
     },
     socialLinks: {
-      github: 'https://github.com/yourusername',
-      linkedin: 'https://linkedin.com/in/yourusername',
-      twitter: 'https://twitter.com/yourusername'
+      github: 'https://github.com/suresh123-git',
+      linkedin: 'https://www.linkedin.com/in/lingalasuresh',
+      twitter: 'https://x.com/LINGALASUR81209'
     }
   };
 
