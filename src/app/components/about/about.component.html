@@ -1,138 +1,103 @@
 <!-- About Section -->
-<section class="about-section fade-in">
+<section class="about-section">
   <div class="container">
     <div class="about-header">
-      <h1>About Me</h1>
-      <p class="subtitle">{{ aboutInfo.title }}</p>
+      <h1 class="name">{{ aboutInfo.name }}</h1>
+      <h2 class="title">{{ aboutInfo.title }}</h2>
+      <p class="location">
+        <i class="material-icons">location_on</i>
+        {{ aboutInfo.location }}
+      </p>
     </div>
 
-    <div class="about-grid">
-      <div class="about-info">
-        <div class="bio-section">
-          <p>{{ aboutInfo.bio }}</p>
-        </div>
-
-        <div class="personal-info">
-          <h2>Personal Information</h2>
-          <div class="info-grid">
-            <div class="info-item">
-              <h3>Education</h3>
-              <p>{{ aboutInfo.personalInfo.education }}</p>
-              <p>{{ aboutInfo.personalInfo.university }} ({{ aboutInfo.personalInfo.graduationYear }})</p>
-            </div>
-            <div class="info-item">
-              <h3>Location</h3>
-              <p>{{ aboutInfo.location }}</p>
-            </div>
-            <div class="info-item">
-              <h3>Email</h3>
-              <p>{{ aboutInfo.email }}</p>
-            </div>
-            <div class="info-item">
-              <h3>Languages</h3>
-              <ul>
-                <li *ngFor="let language of aboutInfo.personalInfo.languages">{{ language }}</li>
-              </ul>
-            </div>
-            <div class="info-item">
-              <h3>Interests</h3>
-              <ul>
-                <li *ngFor="let interest of aboutInfo.personalInfo.interests">{{ interest }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <div class="about-content">
+      <div class="bio-section">
+        <p class="bio">{{ aboutInfo.bio }}</p>
       </div>
 
-      <div class="technical-skills fade-in">
-        <h2>Technical Skills</h2>
-        <div class="skills-container">
-          <div class="skill-category">
-            <div class="category-header">
-              <i class="fas fa-laptop-code"></i>
-              <h3>Frontend Development</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.frontend">
-                <span class="skill-name">{{ skill }}</span>
-                <div class="skill-level"></div>
-              </div>
+      <div class="personal-info-grid">
+        <div class="info-card education">
+          <h3><i class="material-icons">school</i> Education</h3>
+          <div class="info-content">
+            <p class="degree">{{ aboutInfo.personalInfo.education.degree }}</p>
+            <p class="university">{{ aboutInfo.personalInfo.education.university }}</p>
+            <p class="specialization">{{ aboutInfo.personalInfo.education.specialization }}</p>
+            <p class="year">Graduated: {{ aboutInfo.personalInfo.education.graduationYear }}</p>
+          </div>
+        </div>
+
+        <div class="info-card contact">
+          <h3><i class="material-icons">contact_mail</i> Contact</h3>
+          <div class="info-content">
+            <p><i class="material-icons">email</i> {{ aboutInfo.personalInfo.contact.email }}</p>
+            <p><i class="material-icons">phone</i> {{ aboutInfo.personalInfo.contact.phone }}</p>
+            <p><i class="material-icons">location_on</i> {{ aboutInfo.personalInfo.contact.location }}</p>
+            <p><i class="material-icons">check_circle</i> {{ aboutInfo.personalInfo.contact.availability }}</p>
+          </div>
+        </div>
+
+        <div class="info-card interests">
+          <h3><i class="material-icons">favorite</i> Interests</h3>
+          <div class="interests-grid">
+            <div class="interest-item" *ngFor="let interest of aboutInfo.personalInfo.interests">
+              <i class="material-icons">{{ interest.icon }}</i>
+              <span>{{ interest.name }}</span>
             </div>
           </div>
+        </div>
 
-          <div class="skill-category">
-            <div class="category-header">
-              <i class="fas fa-server"></i>
-              <h3>Backend Development</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.backend">
-                <span class="skill-name">{{ skill }}</span>
-                <div class="skill-level"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <div class="category-header">
-              <i class="fas fa-tools"></i>
-              <h3>Tools & Technologies</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.tools">
-                <span class="skill-name">{{ skill }}</span>
-                <div class="skill-level"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <div class="category-header">
-              <i class="fas fa-sitemap"></i>
-              <h3>Methodologies</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item" *ngFor="let skill of aboutInfo.technicalSkills.methodologies">
-                <span class="skill-name">{{ skill }}</span>
-                <div class="skill-level"></div>
-              </div>
+        <div class="info-card languages">
+          <h3><i class="material-icons">language</i> Languages</h3>
+          <div class="languages-list">
+            <div class="language-item" *ngFor="let language of aboutInfo.personalInfo.languages">
+              <span class="language-name">{{ language.name }}</span>
+              <span class="language-level">{{ language.level }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="experience-section">
-        <h2>Professional Experience</h2>
+        <h2 class="section-title">Professional Experience</h2>
         <div class="timeline">
           <div class="timeline-item" *ngFor="let exp of aboutInfo.experience">
-            <div class="timeline-header">
-              <h3>{{ exp.position }}</h3>
-              <span class="period">{{ exp.period }}</span>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="company">{{ exp.company }}</h3>
+                <span class="period">{{ exp.period }}</span>
+              </div>
+              <div class="position-location">
+                <span class="position">{{ exp.position }}</span>
+                <span class="location">{{ exp.location }}</span>
+              </div>
+              <p class="description">{{ exp.description }}</p>
+              
+              <div class="technologies">
+                <span class="tech-tag" *ngFor="let tech of exp.technologies">{{ tech }}</span>
+              </div>
+
+              <div class="achievements">
+                <div class="achievement-item" *ngFor="let achievement of exp.achievements">
+                  <h4>{{ achievement.title }}</h4>
+                  <p>{{ achievement.description }}</p>
+                  <span class="impact">Impact: {{ achievement.impact }}</span>
+                </div>
+              </div>
             </div>
-            <div class="company">{{ exp.company }}</div>
-            <p class="description">{{ exp.description }}</p>
-            <ul class="achievements">
-              <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="certifications-section">
-        <h2>Certifications</h2>
-        <div class="certifications-grid">
-          <div class="certification-item" *ngFor="let cert of aboutInfo.certifications">
-            <h3>{{ cert.name }}</h3>
-            <p>{{ cert.issuer }} ({{ cert.year }})</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="cta-section">
-      <h2>Let's Work Together</h2>
-      <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
-      <a routerLink="/contact" class="cta-button">Get in Touch</a>
-    </div>
+<!-- Get in Touch Section -->
+<section class="contact-cta">
+  <div class="container">
+    <h2 class="section-title fade-in">Let's Work Together</h2>
+    <p class="cta-description fade-in">
+      I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+    </p>
+    <a routerLink="/contact" class="btn btn-primary fade-in">Get in Touch</a>
   </div>
 </section> 

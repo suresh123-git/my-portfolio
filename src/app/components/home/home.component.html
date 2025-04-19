@@ -1,24 +1,25 @@
 <!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content fade-in">
-      <h1 class="hero-title">Hi, I'm <span class="highlight">{{ developerInfo.name }}</span></h1>
-      <h2 class="hero-subtitle">{{ developerInfo.title }}</h2>
-      <p class="hero-description">
-        {{ developerInfo.bio }}
-      </p>
-      <div class="hero-cta">
-        <a routerLink="/projects" class="btn btn-primary">View My Work</a>
-        <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
-      </div>
-      <div class="social-links">
-        <a [href]="developerInfo.github" target="_blank" rel="noopener noreferrer" title="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a [href]="developerInfo.linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+<section class="hero fade-in">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="highlight">{{ developerInfo.name }}</span>
+    </h1>
+    <h2 class="hero-subtitle">{{ developerInfo.title }}</h2>
+    <p class="hero-description">
+      {{ developerInfo.bio }}
+    </p>
+    <div class="hero-cta">
+      <a routerLink="/projects" class="btn btn-primary">View Projects</a>
+      <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
+    </div>
+    <div class="social-links">
+      <a *ngFor="let link of socialLinks" 
+         [href]="link.url" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         [title]="link.name">
+        <i [class]="link.icon"></i>
+      </a>
     </div>
   </div>
 </section>
@@ -56,7 +57,7 @@
           <div class="project-tech">
             <span *ngFor="let tech of project.technologies">{{ tech }}</span>
           </div>
-          <a [href]="project.link" class="btn btn-outline">View Project</a>
+          <a [routerLink]="['/projects']" [queryParams]="{id: project.slug}" class="btn btn-outline">View Project</a>
         </div>
       </div>
     </div>

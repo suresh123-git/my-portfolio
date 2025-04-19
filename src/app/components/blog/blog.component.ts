@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CaseStudyDetailComponent } from '../case-study-detail/case-study-detail.component';
 
 interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   content: string;
@@ -27,146 +27,172 @@ interface BlogPost {
 export class BlogComponent implements OnInit {
   blogPosts: BlogPost[] = [
     {
-      id: 1,
-      title: 'Scaling HRMS: From Monolithic to Microservices - A Real-World Case Study',
-      excerpt: 'Learn how we transformed a traditional HRMS system to handle massive attendance data processing using microservices architecture.',
+      id: 'monolithic-to-microservices',
+      title: 'Microservices vs Monolithic Architecture',
+      excerpt: 'A detailed analysis of migrating from monolithic to microservices architecture, focusing on scalability and maintainability.',
       content: `
-        <div class="article-content">
-          <h2>Introduction</h2>
-          <p>In this case study, we'll explore how we successfully migrated a monolithic HRMS (Human Resource Management System) to a microservices architecture, with a particular focus on handling massive attendance data processing. Our system needed to handle thousands of attendance punches per second from multiple clients, along with various bulk operations.</p>
-
-          <h2>The Challenge</h2>
-          <p>Our monolithic application was facing several critical challenges:</p>
-          <ul>
-            <li><strong>Massive Data Processing:</strong> Handling thousands of attendance punches per second from multiple clients</li>
-            <li><strong>Bulk Operations:</strong> Processing large-scale attendance data updates and reports</li>
-            <li><strong>Scalability Issues:</strong> The system was struggling to handle increasing user load</li>
-            <li><strong>Performance Bottlenecks:</strong> Real-time data processing was causing delays</li>
-            <li><strong>Complex Deployment:</strong> Making changes required deploying the entire application</li>
-          </ul>
-
-          <h2>The Solution Architecture</h2>
-          <p>We implemented a modern microservices architecture with the following components:</p>
-          <ul>
-            <li><strong>Frontend:</strong> Angular with standalone components for better performance</li>
-            <li><strong>Backend Services:</strong> NestJS microservices for modular functionality</li>
-            <li><strong>Database:</strong> MongoDB for flexible data storage and better scalability</li>
-            <li><strong>Message Broker:</strong> Apache Kafka for real-time data processing</li>
-            <li><strong>Cache Layer:</strong> Redis for high-performance data caching</li>
-          </ul>
-
-          <h2>Key Implementations</h2>
-          
-          <h3>1. Attendance Processing Service</h3>
-          <p>We created a dedicated microservice for handling attendance data:</p>
-          <ul>
-            <li>Implemented Kafka for handling bulk attendance operations</li>
-            <li>Processed thousands of attendance punches per second</li>
-            <li>Used Redis for real-time data caching</li>
-            <li>Implemented data validation and error handling</li>
-          </ul>
-
-          <h3>2. Data Processing Pipeline</h3>
-          <p>Our data processing pipeline includes:</p>
-          <ul>
-            <li>Real-time data ingestion through Kafka</li>
-            <li>Data validation and transformation</li>
-            <li>Parallel processing of attendance records</li>
-            <li>Error handling and retry mechanisms</li>
-          </ul>
-
-          <h3>3. Bulk Operations Handling</h3>
-          <p>For handling bulk operations, we implemented:</p>
-          <ul>
-            <li>Batch processing for large datasets</li>
-            <li>Asynchronous processing for non-critical operations</li>
-            <li>Progress tracking and status updates</li>
-            <li>Error recovery mechanisms</li>
-          </ul>
-
-          <h2>Technical Implementation Details</h2>
-          
-          <h3>1. Kafka Implementation</h3>
-          <p>We used Kafka for handling real-time data processing:</p>
-          <ul>
-            <li>Created separate topics for different types of operations</li>
-            <li>Implemented consumer groups for parallel processing</li>
-            <li>Used Kafka Streams for data transformation</li>
-            <li>Implemented proper error handling and retry logic</li>
-          </ul>
-
-          <h3>2. Database Optimization</h3>
-          <p>Key database optimizations included:</p>
-          <ul>
-            <li>Sharding for better data distribution</li>
-            <li>Indexing for faster queries</li>
-            <li>Connection pooling for better resource utilization</li>
-            <li>Implementing read replicas for better performance</li>
-          </ul>
-
-          <h3>3. Caching Strategy</h3>
-          <p>We implemented a multi-level caching strategy:</p>
-          <ul>
-            <li>Redis for real-time data caching</li>
-            <li>In-memory caching for frequently accessed data</li>
-            <li>Cache invalidation strategies</li>
-            <li>Distributed caching for better scalability</li>
-          </ul>
-
-          <h2>Results and Benefits</h2>
-          <ul>
-            <li><strong>Improved Performance:</strong> Reduced processing time by 70%</li>
-            <li><strong>Better Scalability:</strong> System now handles 10x more concurrent users</li>
-            <li><strong>Enhanced Reliability:</strong> 99.9% uptime with proper error handling</li>
-            <li><strong>Cost Efficiency:</strong> Reduced infrastructure costs by 40%</li>
-            <li><strong>Better Maintainability:</strong> Easier to update and deploy individual services</li>
-          </ul>
-
-          <h2>Best Practices Implemented</h2>
-          <ul>
-            <li>Proper error handling and logging</li>
-            <li>Comprehensive monitoring and alerting</li>
-            <li>Automated testing and deployment</li>
-            <li>Documentation and knowledge sharing</li>
-            <li>Regular performance optimization</li>
-          </ul>
-
-          <h2>Conclusion</h2>
-          <p>The migration to microservices architecture has significantly improved our system's ability to handle massive attendance data processing. The combination of Kafka for real-time processing, MongoDB for flexible data storage, and Redis for caching has enabled us to achieve unprecedented scalability and performance. This architecture now efficiently handles thousands of attendance punches per second while maintaining data consistency and system reliability.</p>
-        </div>
+        <h2>Architectural Evolution: From Monolithic to Microservices</h2>
+        <p>In today's fast-paced digital landscape, the choice between monolithic and microservices architecture is crucial for application scalability and maintainability.</p>
+        
+        <h3>Monolithic Architecture</h3>
+        <p>Traditional monolithic applications bundle all components into a single codebase, making initial development straightforward but posing challenges in scaling and maintenance.</p>
+        
+        <h3>Microservices Architecture</h3>
+        <p>Microservices break down applications into smaller, independent services, each responsible for specific business capabilities. This approach offers:</p>
+        <ul>
+          <li>Independent scaling of services</li>
+          <li>Faster deployment cycles</li>
+          <li>Technology flexibility</li>
+          <li>Improved fault isolation</li>
+        </ul>
+        
+        <h3>Decision Factors</h3>
+        <p>Key considerations when choosing between architectures:</p>
+        <ul>
+          <li>Application complexity and size</li>
+          <li>Team structure and expertise</li>
+          <li>Scalability requirements</li>
+          <li>Deployment frequency</li>
+        </ul>
+        
+        <h3>Real-world Implementation</h3>
+        <p>Our experience in migrating a monolithic HRMS application to microservices demonstrated significant improvements in:</p>
+        <ul>
+          <li>System performance and reliability</li>
+          <li>Development velocity</li>
+          <li>Resource utilization</li>
+          <li>Maintenance efficiency</li>
+        </ul>
       `,
       date: '2024-03-20',
       readTime: '12 min read',
       category: 'Architecture',
-      image: 'https://picsum.photos/800/400?random=1',
-      tags: ['Microservices', 'Kafka', 'MongoDB', 'NestJS', 'Angular', 'Performance']
+      image: 'assets/images/projects/mono_micro_img.png',
+      tags: ['Architecture', 'Microservices', 'Scalability', 'NestJS']
     },
     {
-      id: 2,
-      title: 'Building Scalable APIs with NestJS and GraphQL',
-      excerpt: 'A comprehensive guide to building scalable and maintainable APIs using NestJS and GraphQL, with real-world examples and best practices.',
+      id: 'graphql-implementation',
+      title: 'GraphQL Implementation Case Study',
+      excerpt: 'Exploring the benefits and challenges of implementing GraphQL in a large-scale application.',
       content: `
-        <div class="article-content">
-          <h2>Introduction to NestJS and GraphQL</h2>
-          <p>NestJS and GraphQL make a powerful combination for building modern APIs. In this post, we'll explore how to leverage these technologies effectively.</p>
-          
-          <h2>Why NestJS + GraphQL?</h2>
-          <ul>
-            <li>Type-safe API development</li>
-            <li>Efficient data fetching</li>
-            <li>Built-in validation</li>
-            <li>Excellent developer experience</li>
-          </ul>
-          
-          <h2>Implementation Details</h2>
-          <p>Learn about the key aspects of implementing a GraphQL API with NestJS...</p>
-        </div>
+        <h2>GraphQL Implementation Journey</h2>
+        <p>Our experience in implementing GraphQL for a large-scale HRMS application revealed valuable insights about modern API design.</p>
+        
+        <h3>Why GraphQL?</h3>
+        <p>GraphQL's flexible querying capabilities addressed several challenges in our REST API implementation:</p>
+        <ul>
+          <li>Over-fetching and under-fetching of data</li>
+          <li>Multiple round trips for related data</li>
+          <li>Versioning complexities</li>
+          <li>Documentation maintenance</li>
+        </ul>
+        
+        <h3>Implementation Approach</h3>
+        <p>Our GraphQL implementation strategy included:</p>
+        <ul>
+          <li>Schema-first development</li>
+          <li>Resolver optimization</li>
+          <li>Caching strategies</li>
+          <li>Error handling standardization</li>
+        </ul>
+        
+        <h3>Challenges and Solutions</h3>
+        <p>Key challenges we faced and how we addressed them:</p>
+        <ul>
+          <li>Performance optimization for complex queries</li>
+          <li>Security and access control</li>
+          <li>Monitoring and debugging</li>
+          <li>Team adoption and training</li>
+        </ul>
+        
+        <h3>Results and Benefits</h3>
+        <p>The implementation yielded significant improvements:</p>
+        <ul>
+          <li>Reduced network payload</li>
+          <li>Improved client performance</li>
+          <li>Better developer experience</li>
+          <li>Enhanced API discoverability</li>
+        </ul>
       `,
       date: '2024-03-10',
       readTime: '8 min read',
       category: 'Backend',
-      image: 'https://picsum.photos/800/400?random=4',
-      tags: ['NestJS', 'GraphQL', 'TypeScript', 'API Design']
+      image: 'assets/images/projects/graphql_casestudy_img.jpg',
+      tags: ['GraphQL', 'API Design', 'Performance', 'NestJS']
+    },
+    {
+      id: 'kafka-implementation',
+      title: 'Kafka Implementation for Real-time Data Processing',
+      excerpt: 'How we solved high-frequency data processing challenges using Kafka in our Time and Attendance module.',
+      content: `
+        <h2>Kafka Implementation: Solving Real-time Data Processing Challenges</h2>
+        <p>Our Time and Attendance module faced significant challenges with high-frequency data processing, leading us to implement Kafka for robust data handling.</p>
+        
+        <h3>The Challenge</h3>
+        <p>Our Time and Attendance module was experiencing critical issues:</p>
+        <ul>
+          <li>Data arriving every second from multiple sources</li>
+          <li>High volume of concurrent data processing</li>
+          <li>Frequent server failures under load</li>
+          <li>Data consistency and reliability issues</li>
+          <li>System performance degradation during peak hours</li>
+        </ul>
+        
+        <h3>Why Kafka?</h3>
+        <p>Kafka provided the perfect solution for our requirements:</p>
+        <ul>
+          <li>High throughput message processing</li>
+          <li>Distributed architecture for scalability</li>
+          <li>Message persistence and replay capability</li>
+          <li>Built-in fault tolerance</li>
+          <li>Real-time data streaming capabilities</li>
+        </ul>
+        
+        <h3>Implementation Strategy</h3>
+        <p>Our Kafka implementation in NestJS included:</p>
+        <ul>
+          <li>Topic partitioning for parallel processing</li>
+          <li>Consumer groups for load balancing</li>
+          <li>Message compression for efficiency</li>
+          <li>Dead letter queues for error handling</li>
+          <li>Monitoring and alerting setup</li>
+        </ul>
+        
+        <h3>Technical Implementation</h3>
+        <p>Key technical aspects of our implementation:</p>
+        <ul>
+          <li>NestJS Kafka microservice setup</li>
+          <li>Custom serializers and deserializers</li>
+          <li>Retry mechanisms for failed messages</li>
+          <li>Message validation and sanitization</li>
+          <li>Performance optimization techniques</li>
+        </ul>
+        
+        <h3>Results and Benefits</h3>
+        <p>The implementation yielded significant improvements:</p>
+        <ul>
+          <li>99.99% system uptime</li>
+          <li>50% reduction in server load</li>
+          <li>Real-time data processing capability</li>
+          <li>Improved data consistency</li>
+          <li>Better error handling and recovery</li>
+        </ul>
+        
+        <h3>Lessons Learned</h3>
+        <p>Key takeaways from our Kafka implementation:</p>
+        <ul>
+          <li>Importance of proper topic partitioning</li>
+          <li>Need for comprehensive monitoring</li>
+          <li>Value of message schema evolution</li>
+          <li>Benefits of consumer group management</li>
+          <li>Significance of proper error handling</li>
+        </ul>
+      `,
+      date: '2024-03-15',
+      readTime: '10 min read',
+      category: 'Backend',
+      image: 'assets/images/projects/kafka_img.png',
+      tags: ['Kafka', 'Real-time Processing', 'NestJS', 'Microservices', 'Performance']
     }
   ];
 
@@ -181,7 +207,8 @@ export class BlogComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   // Computed properties
@@ -217,6 +244,12 @@ export class BlogComponent implements OnInit {
 
   // Methods
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.viewPost(params['id']);
+      }
+    });
+
     // Add animation classes after component is mounted
     setTimeout(() => {
       const elements = document.querySelectorAll('.fade-in');
@@ -257,7 +290,7 @@ export class BlogComponent implements OnInit {
     }
   }
 
-  viewPost(postId: number): void {
+  viewPost(postId: string): void {
     this.selectedPost = this.blogPosts.find(post => post.id === postId) || null;
     if (this.selectedPost) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
