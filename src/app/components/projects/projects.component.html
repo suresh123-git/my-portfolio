@@ -12,11 +12,11 @@
           <img [src]="project.image" [alt]="project.title">
           <div class="project-overlay">
             <div class="overlay-content">
-              <h3>{{ project.subtitle }}</h3>
-              <p>{{ project.description }}</p>
+              <!-- <h3>{{ project.subtitle }}</h3>
+              <p>{{ project.description }}</p> -->
               <div class="tech-stack">
-                <span class="tech-tag" *ngFor="let tech of project.technologies.slice(0, 3)">{{ tech }}</span>
-                <span class="more-tech" *ngIf="project.technologies.length > 3">+{{ project.technologies.length - 3 }}</span>
+                <!-- <span class="tech-tag" *ngFor="let tech of project.technologies.slice(0, 3)">{{ tech }}</span>
+                <span class="more-tech" *ngIf="project.technologies.length > 3">+{{ project.technologies.length - 3 }}</span> -->
               </div>
               <button class="view-project-btn" (click)="viewProject(project)">
                 <i class="material-icons">visibility</i>
@@ -32,7 +32,7 @@
   <app-project-detail-modal 
     *ngIf="selectedProject" 
     [project]="selectedProject"
-    (closeModal)="closeModal()">
+    (close)="closeModal()">
   </app-project-detail-modal>
 </section>
 

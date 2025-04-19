@@ -33,7 +33,7 @@ export class AboutComponent implements OnInit {
         { name: 'Microservices Architecture', icon: 'architecture' },
         { name: 'Real-time Applications', icon: 'bolt' },
         { name: 'Web Development', icon: 'code' },
-        { name: 'System Design', icon: 'settings_suggest' }
+        // { name: 'System Design', icon: 'settings_suggest' }
       ],
       languages: [
         { name: 'English', level: 'Professional' },

@@ -335,4 +335,105 @@ $section-bg: #f8f9fa;
       box-shadow: 0 6px 20px rgba(0, 255, 157, 0.4);
     }
   }
+}
+
+// Project Modal Styles
+.project-modal {
+  .modal-content {
+    background: var(--background-color);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .modal-header {
+      margin-bottom: 2rem;
+
+      h2 {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+      }
+    }
+
+    .project-details {
+      .key-features {
+        h3 {
+          font-size: 2rem;
+          color: var(--primary-color);
+          margin-bottom: 1.5rem;
+          position: relative;
+          display: inline-block;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+          }
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+
+            &::before {
+              content: '';
+              min-width: 8px;
+              height: 8px;
+              background: var(--primary-color);
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+
+      .description {
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 2rem 0;
+      }
+
+      .tech-stack {
+        margin: 2rem 0;
+
+        h4 {
+          color: var(--text-color);
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.8rem;
+
+          .tech-tag {
+            background: var(--card-background);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            border: 1px solid var(--primary-color);
+          }
+        }
+      }
+    }
+  }
 } 

@@ -13,6 +13,38 @@ import { ProjectDetailModalComponent } from './project-detail-modal/project-deta
 export class ProjectsComponent implements OnInit {
   projects = [
     {
+      title: 'Personal Portfolio',
+      subtitle: 'Portfolio Website',
+      description: 'Developed a modern, responsive portfolio website using Angular, featuring a clean design, smooth animations, and interactive project showcases. The portfolio includes detailed project descriptions, skills visualization, and a contact form.',
+      technologies: ['Angular', 'TypeScript', 'SCSS', 'Angular Material', 'Angular Animations', 'Responsive Design'],
+      image: 'assets/images/projects/portfolio_img.jpg',
+      link: '/projects/personal-portfolio',
+      features: [
+        'Modern and responsive design with Angular Material',
+        'Interactive project showcase with modal views',
+        'Animated skill bars and progress indicators',
+        'Dynamic content loading with smooth transitions',
+        'Contact form with email integration',
+        'SEO-friendly implementation',
+        'Cross-browser compatibility',
+        'Mobile-first approach'
+      ],
+      challenges: [
+        'Implementing smooth animations and transitions',
+        'Creating an intuitive and engaging user interface',
+        'Optimizing performance and load times',
+        'Ensuring responsive design across all devices',
+        'Managing state and routing effectively'
+      ],
+      outcomes: [
+        'Created a professional and modern portfolio website',
+        'Implemented responsive design for all screen sizes',
+        'Achieved optimal performance scores',
+        'Enhanced user experience with smooth animations',
+        'Improved project showcase with detailed modal views'
+      ]
+    },
+    {
       title: 'Enterprise HRMS Application',
       subtitle: 'HRMS Application',
       description: 'Developed a large-scale HRMS application using microservices architecture, with a special focus on Time and Attendance and Timesheets modules. Implemented real-time data processing for attendance tracking and timesheet management using GraphQL APIs and Kafka for high-frequency data updates.',
