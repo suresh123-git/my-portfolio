@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -18,17 +19,17 @@ export class ContactComponent implements OnInit {
   submitError = false;
 
   contactInfo = {
-    email: 'your.email@example.com',
-    location: 'Your Location',
-    phone: '+1 234 567 8900',
+    email: 'lingalasuresh0606@gmail.com',
+    location: 'Hyderabad, India',
+    phone: '+91 7981570771',
     availability: {
       days: 'Monday - Friday',
       hours: '9:00 AM - 6:00 PM'
     },
     socialLinks: {
-      github: 'https://github.com/yourusername',
-      linkedin: 'https://linkedin.com/in/yourusername',
-      twitter: 'https://twitter.com/yourusername'
+      github: 'https://github.com/suresh123-git',
+      linkedin: 'https://www.linkedin.com/in/lingalasuresh',
+      twitter: 'https://x.com/LINGALASUR81209'
     }
   };
 
@@ -68,7 +69,7 @@ export class ContactComponent implements OnInit {
       const formData = this.contactForm.value;
 
       // Send email using your backend API
-      this.http.post('http://localhost:3000/api/email/send', formData)
+      this.http.post(`${environment.apiUrl}/api/email/send`, formData)
         .subscribe({
           next: (response) => {
             console.log('Email sent successfully:', response);
@@ -137,7 +138,7 @@ export class ContactComponent implements OnInit {
       try {
         console.log(this.contactForm.value,'djkghdjghdj');
         
-        await this.http.post('http://localhost:3000/api/email/send', this.contactForm.value).toPromise();
+        await this.http.post(`${environment.apiUrl}/api/email/send`, this.contactForm.value).toPromise();
         this.isSubmitting = false;
         this.submitSuccess = true;
         this.contactForm.reset();

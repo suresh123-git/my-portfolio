@@ -2,7 +2,7 @@
   <div class="container">
     <div class="footer-content">
       <h3>Suresh Lingala</h3>
-      <p>Passionate MEAN Stack Developer creating innovative web solutions with modern technologies.</p>
+      <p>Full-stack engineer focused on scalable product systems, real-time workflows, and backend-heavy web engineering.</p>
     </div>
 
     <ul class="footer-links">
@@ -15,15 +15,16 @@
     <div class="social-links">
       <a *ngFor="let link of socialLinks" 
          [href]="link.url" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         [title]="link.icon.split(' ')[2]">
+         [target]="link.icon !== 'fas fa-envelope' ? '_blank' : null"
+         [rel]="link.icon !== 'fas fa-envelope' ? 'noopener noreferrer' : null"
+         [title]="link.icon.includes('envelope') ? 'Email' : link.icon.split(' ')[2]"
+         [attr.aria-label]="link.icon.includes('envelope') ? 'Send email' : 'Open social profile'">
         <i [class]="link.icon"></i>
       </a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; {{ currentYear }} Your Name. All rights reserved.</p>
+    <p>&copy; {{ currentYear }} Suresh Lingala. All rights reserved.</p>
   </div>
 </footer> 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -13,15 +14,19 @@ import { ContactComponent } from './components/contact/contact.component';
 import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProjectsComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AppRoutingModule,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
     AboutComponent,
-    ProjectsComponent,
     ContactComponent,
     BlogComponent
   ],

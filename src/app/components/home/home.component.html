@@ -1,95 +1,237 @@
-<!-- Hero Section -->
 <section class="hero">
+  <div class="hero-backdrop" aria-hidden="true">
+    <span class="backdrop-orb orb-one"></span>
+    <span class="backdrop-orb orb-two"></span>
+    <span class="backdrop-grid"></span>
+  </div>
+  <div class="container hero-layout">
+    <div class="hero-main">
+      <div class="hero-copy fade-in">
+        <p class="hero-badge">{{ hero.badge }}</p>
+        <p class="hero-eyebrow">{{ hero.name }} | {{ hero.location }}</p>
+        <h1 class="hero-title">{{ hero.title }}</h1>
+        <p class="hero-summary">{{ hero.summary }}</p>
+
+        <div class="hero-actions">
+          <a routerLink="/projects" class="btn btn-primary">{{ hero.primaryCta }}</a>
+          <a [href]="resumeUrl" [attr.download]="resumeFileName" class="btn btn-secondary">Download Resume</a>
+          <a routerLink="/contact" class="btn btn-secondary">{{ hero.secondaryCta }}</a>
+        </div>
+
+        <div class="hero-socials" aria-label="Social links">
+          <a
+            *ngFor="let link of socialLinks"
+            [href]="link.url"
+            [target]="link.name !== 'Email' ? '_blank' : null"
+            [rel]="link.name !== 'Email' ? 'noopener noreferrer' : null"
+            [attr.aria-label]="link.label"
+            [title]="link.name">
+            <i [class]="link.icon" aria-hidden="true"></i>
+            <span>{{ link.name }}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="skills-chart-card fade-in">
+        <div class="skills-chart-header">
+          <p class="panel-label">Skill Distribution</p>
+          <span>Where I add the most value</span>
+        </div>
+
+        <div class="skills-chart-layout">
+          <div class="donut-chart" aria-hidden="true" [style.background]="skillChartGradient">
+            <div class="donut-hole">
+              <strong>4 Focus Areas</strong>
+              <span>Product-ready engineering</span>
+            </div>
+          </div>
+
+          <div class="chart-legend">
+            <article *ngFor="let item of skillChartItems; let i = index" class="legend-item">
+              <div class="legend-topline">
+                <span class="legend-dot legend-dot-{{ i + 1 }}"></span>
+                <h3>{{ item.label }}</h3>
+                <strong>{{ item.value }}%</strong>
+              </div>
+              <p>{{ item.note }}</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="architecture-card fade-in">
+        <div class="architecture-header">
+          <div>
+            <p class="panel-label">System View</p>
+            <h2>How I approach full-stack product delivery</h2>
+          </div>
+          <span>UI to infrastructure</span>
+        </div>
+
+        <div class="architecture-flow" aria-hidden="true">
+          <span class="flow-node">Frontend</span>
+          <span class="flow-line"></span>
+          <span class="flow-node">API</span>
+          <span class="flow-line"></span>
+          <span class="flow-node">Realtime</span>
+          <span class="flow-line"></span>
+          <span class="flow-node">Data</span>
+          <span class="flow-line"></span>
+          <span class="flow-node">Cloud</span>
+        </div>
+
+        <div class="architecture-grid">
+          <article *ngFor="let node of architectureNodes">
+            <h3>{{ node.label }}</h3>
+            <p>{{ node.detail }}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-panel fade-in">
+      <div class="identity-card">
+        <div class="identity-copy">
+          <p class="panel-label">Recruiter Snapshot</p>
+          <h2>Backend-heavy product engineer with real enterprise delivery behind the profile.</h2>
+          <p class="identity-summary">
+            Strongest in teams that need someone who can understand business workflows, build the API layer, and still ship polished frontend experiences without losing speed or reliability.
+          </p>
+          <div class="signal-list">
+            <div *ngFor="let signal of heroSignals" class="signal-item">
+              <span>{{ signal.label }}</span>
+              <strong>{{ signal.value }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <p class="panel-label">Why recruiters should keep reading</p>
+        <ul class="proof-list">
+          <li *ngFor="let metric of highlightMetrics">
+            <strong>{{ metric.value }}</strong>
+            <span>{{ metric.label }}</span>
+            <small>{{ metric.detail }}</small>
+          </li>
+        </ul>
+      </div>
+
+      <div class="snapshot-card">
+        <p class="panel-label">Current focus</p>
+        <div class="snapshot-grid">
+          <article *ngFor="let capability of capabilities">
+            <h2>{{ capability.title }}</h2>
+            <p>{{ capability.description }}</p>
+            <span>{{ capability.evidence }}</span>
+          </article>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="impact-strip">
+  <div class="container impact-grid">
+    <article *ngFor="let metric of highlightMetrics" class="impact-card fade-in">
+      <p class="impact-value">{{ metric.value }}</p>
+      <h2>{{ metric.label }}</h2>
+      <p>{{ metric.detail }}</p>
+    </article>
+  </div>
+</section>
+
+<section class="strengths">
   <div class="container">
-    <div class="hero-content fade-in">
-      <h1 class="hero-title">Hi, I'm <span class="highlight">{{ developerInfo.name }}</span></h1>
-      <h2 class="hero-subtitle">{{ developerInfo.title }}</h2>
-      <p class="hero-description">
-        {{ developerInfo.bio }}
+    <div class="section-heading fade-in">
+      <p class="section-kicker">Strengths</p>
+      <h2>Backend-heavy full-stack work with proof behind it</h2>
+      <p>
+        Instead of self-scored skill bars, this section highlights the kind of work I'm strongest at and the environments where I add the most value.
       </p>
-      <div class="hero-cta">
-        <a routerLink="/projects" class="btn btn-primary">View My Work</a>
-        <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
-      </div>
-      <div class="social-links">
-        <a [href]="developerInfo.github" target="_blank" rel="noopener noreferrer" title="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a [href]="developerInfo.linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+    </div>
+
+    <div class="strength-grid">
+      <article *ngFor="let group of strengthGroups" class="strength-card fade-in">
+        <h3>{{ group.title }}</h3>
+        <p>{{ group.summary }}</p>
+        <div class="tag-list">
+          <span *ngFor="let item of group.items">{{ item }}</span>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Skills Section -->
-<section class="skills">
+<section class="featured-work">
   <div class="container">
-    <h2 class="section-title fade-in">Technical Skills</h2>
-    <div class="skills-grid">
-      <div *ngFor="let skill of developerInfo.skills; let i = index" class="skill-item fade-in" [style.animation-delay]="i * 0.1 + 's'">
-        <div class="skill-header">
-          <span class="skill-name">{{ skill.name }}</span>
-          <span class="skill-level">{{ skill.level }}%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-progress" [style.width.%]="skill.level"></div>
-        </div>
-      </div>
+    <div class="section-heading fade-in">
+      <p class="section-kicker">Selected Work</p>
+      <h2>Projects framed around product impact, not just tech stacks</h2>
+      <p>
+        These are the projects I'd want a recruiter or hiring manager to scan first because they show scale, architecture thinking, and measurable outcomes.
+      </p>
     </div>
-  </div>
-</section>
 
-<!-- Recent Projects Section -->
-<section class="projects">
-  <div class="container">
-    <h2 class="section-title fade-in">Recent Projects</h2>
-    <div class="projects-grid">
-      <div *ngFor="let project of developerInfo.recentProjects; let i = index" class="project-card fade-in" [style.animation-delay]="i * 0.2 + 's'">
-        <div class="project-image">
-          <img [src]="project.image" [alt]="project.title">
+    <div class="featured-grid">
+      <article *ngFor="let project of featuredProjects" class="featured-card fade-in">
+        <div class="featured-image">
+          <img [src]="project.image" [alt]="project.title" loading="lazy">
         </div>
-        <div class="project-content">
-          <h3 class="project-title">{{ project.title }}</h3>
-          <p class="project-description">{{ project.description }}</p>
-          <div class="project-tech">
+        <div class="featured-content">
+          <p class="featured-impact">{{ project.impact }}</p>
+          <h3>{{ project.title }}</h3>
+          <p class="featured-summary">{{ project.summary }}</p>
+          <div class="tag-list">
             <span *ngFor="let tech of project.technologies">{{ tech }}</span>
           </div>
-          <a [href]="project.link" class="btn btn-outline">View Project</a>
+          <a [routerLink]="['/projects']" [queryParams]="{ id: project.slug }" class="text-link">Open case study</a>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Experience Section -->
 <section class="experience">
   <div class="container">
-    <h2 class="section-title fade-in">Experience</h2>
-    <div class="timeline">
-      <div *ngFor="let exp of developerInfo.experience; let i = index" class="timeline-item fade-in" [style.animation-delay]="i * 0.3 + 's'">
-        <div class="timeline-content">
-          <h3 class="timeline-title">{{ exp.position }}</h3>
-          <h4 class="timeline-company">{{ exp.company }}</h4>
-          <p class="timeline-period">{{ exp.period }}</p>
-          <p class="timeline-description">{{ exp.description }}</p>
-          <ul class="timeline-achievements" *ngIf="exp.achievements">
-            <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
-          </ul>
+    <div class="section-heading fade-in">
+      <p class="section-kicker">Experience</p>
+      <h2>Professional work with enterprise context</h2>
+      <p>
+        My experience is strongest where product complexity, backend reliability, and real operational workflows overlap.
+      </p>
+    </div>
+
+    <div class="experience-list">
+      <article *ngFor="let item of experience" class="experience-card fade-in">
+        <div class="experience-topline">
+          <div>
+            <p class="experience-role">{{ item.position }}</p>
+            <h3>{{ item.company }}</h3>
+          </div>
+          <span class="experience-period">{{ item.period }}</span>
         </div>
-      </div>
+        <p class="experience-scope">{{ item.scope }}</p>
+        <ul class="experience-points">
+          <li *ngFor="let achievement of item.achievements">{{ achievement }}</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Contact CTA Section -->
-<section class="contact-cta">
-  <div class="container">
-    <h2 class="section-title fade-in">Let's Work Together</h2>
-    <p class="cta-description fade-in">
-      I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
-    </p>
-    <a routerLink="/contact" class="btn btn-primary fade-in">Get in Touch</a>
+<section class="recruiter-cta">
+  <div class="container recruiter-shell fade-in">
+    <div>
+      <p class="section-kicker">Next Step</p>
+      <h2>Looking for an engineer who can ship frontend and backend work end-to-end?</h2>
+      <p>
+        I'm strongest in product teams that need reliable APIs, real-time workflows, and frontend delivery that stays grounded in business impact.
+      </p>
+    </div>
+
+    <div class="cta-actions">
+      <a *ngFor="let cta of recruiterCtas" [routerLink]="cta.route" class="btn btn-primary">{{ cta.label }}</a>
+    </div>
   </div>
-</section> 
+</section>

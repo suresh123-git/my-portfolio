@@ -11,14 +11,18 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   isMenuOpen = false;
-  isDarkMode = false;
+  readonly resumeUrl = 'assets/images/profile/Suresh%20Lingala%20Resume.pdf';
+  readonly resumeFileName = 'Suresh-Lingala-Resume.pdf';
+
+  constructor() {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  toggleTheme() {
-    this.isDarkMode = !this.isDarkMode;
-    document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 } 

@@ -1,0 +1,214 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(9, 6, 4, 0.78);
+  backdrop-filter: blur(16px);
+}
+
+.modal-content {
+  position: relative;
+  width: min(940px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba(27, 19, 14, 0.98), rgba(17, 12, 9, 0.99));
+  border: 1px solid var(--border-color);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.45);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 138, 61, 0.16);
+  color: var(--text-strong);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+
+  &:hover {
+    transform: rotate(90deg);
+    background: rgba(255, 138, 61, 0.08);
+  }
+}
+
+.project-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 1.35rem;
+  padding: 1.4rem;
+  border-bottom: 1px solid rgba(255, 138, 61, 0.1);
+}
+
+.project-media {
+  overflow: hidden;
+  border-radius: 1.6rem;
+  min-height: 280px;
+  position: relative;
+  background:
+    radial-gradient(circle at center, rgba(255, 138, 61, 0.08), transparent 48%),
+    rgba(20, 14, 11, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 36%, rgba(14, 9, 6, 0.38) 100%),
+    radial-gradient(circle at center, rgba(255, 138, 61, 0.12), transparent 46%);
+}
+
+.project-media .project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 1rem;
+}
+
+.project-title-section {
+  display: grid;
+  align-content: center;
+
+  .eyebrow {
+    margin-bottom: 0.5rem;
+    color: var(--accent-secondary);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin-bottom: 0.85rem;
+    color: var(--text-strong);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .subtitle {
+    color: var(--text-default);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    font-weight: 600;
+  }
+}
+
+.project-body {
+  padding: 1.4rem;
+
+  h3 {
+    margin-bottom: 0.75rem;
+    color: var(--text-strong);
+    font-size: 1.08rem;
+  }
+
+  p,
+  li,
+  a {
+    color: var(--text-muted);
+    line-height: 1.72;
+  }
+}
+
+.description-section,
+.technologies-section,
+.features-section,
+.outcomes-section,
+.links-section {
+  margin-top: 1.2rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.overview-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 138, 61, 0.1);
+}
+
+.tech-tags,
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tech-tag,
+.link-list a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 138, 61, 0.1);
+  color: var(--text-default);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.link-list a {
+  color: var(--accent-secondary);
+}
+
+ul {
+  display: grid;
+  gap: 0.7rem;
+}
+
+li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent-strong);
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .project-header,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-media {
+    min-height: 220px;
+  }
+
+  .project-media .project-image {
+    padding: 0.8rem;
+  }
+}
