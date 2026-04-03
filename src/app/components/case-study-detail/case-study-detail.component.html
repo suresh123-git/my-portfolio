@@ -1,27 +1,70 @@
-<div class="case-study-detail">
-  <div class="case-study-header">
-    <button class="back-button" (click)="handleBack()">
-      <span class="material-icons">arrow_back</span>
-      Back to Case Studies
-    </button>
-    <h1>{{ caseStudy.title }}</h1>
-    <div class="meta-info">
-      <span class="date">{{ caseStudy.date }}</span>
-      <span class="read-time">{{ caseStudy.readTime }} min read</span>
-      <div class="tags">
-        <span *ngFor="let tag of caseStudy.tags" class="tag">{{ tag }}</span>
+<div class="case-study-modal" (click)="handleBack()">
+  <article class="case-study-detail" (click)="$event.stopPropagation()">
+    <header class="case-study-hero">
+      <div class="hero-topbar">
+        <button class="back-button" (click)="handleBack()">
+          <span class="material-icons">arrow_back</span>
+          Back to Case Studies
+        </button>
+
+        <button class="close-button" (click)="handleBack()" aria-label="Close case study">
+          <span class="material-icons">close</span>
+        </button>
       </div>
-    </div>
-  </div>
 
-  <div class="case-study-content">
-    <div class="article-content" [innerHTML]="getSafeHtml(caseStudy.content)"></div>
-  </div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Case Study</p>
+          <h1>{{ caseStudy.title }}</h1>
+          <p class="hero-summary">{{ caseStudy.excerpt }}</p>
 
-  <div class="case-study-footer">
-    <button class="back-button" (click)="handleBack()">
-      <span class="material-icons">arrow_back</span>
-      Back to Case Studies
-    </button>
-  </div>
+          <div class="meta-strip">
+            <div class="meta-card">
+              <span>Date</span>
+              <strong>{{ caseStudy.date }}</strong>
+            </div>
+            <div class="meta-card">
+              <span>Read Time</span>
+              <strong>{{ caseStudy.readTime }}</strong>
+            </div>
+            <div class="meta-card">
+              <span>Category</span>
+              <strong>{{ caseStudy.category }}</strong>
+            </div>
+          </div>
+
+          <div class="tags">
+            <span *ngFor="let tag of caseStudy.tags" class="tag">{{ tag }}</span>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <img [src]="caseStudy.image" [alt]="caseStudy.title" loading="lazy">
+        </div>
+      </div>
+    </header>
+
+    <section class="case-study-body">
+      <div class="article-shell">
+        <div class="article-content" [innerHTML]="getSafeHtml(caseStudy.content)"></div>
+      </div>
+    </section>
+
+    <footer class="case-study-footer">
+      <div class="footer-card">
+        <div>
+          <p class="eyebrow">Next Step</p>
+          <h2>Want to see more backend, architecture, and systems work?</h2>
+          <p>Explore the rest of the case studies or get in touch for the full project context.</p>
+        </div>
+
+        <div class="footer-actions">
+          <button class="back-button secondary" (click)="handleBack()">
+            <span class="material-icons">arrow_back</span>
+            Back to Case Studies
+          </button>
+        </div>
+      </div>
+    </footer>
+  </article>
 </div>

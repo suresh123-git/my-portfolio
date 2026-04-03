@@ -293,7 +293,7 @@ export class BlogComponent implements OnInit {
   viewPost(postId: string): void {
     this.selectedPost = this.blogPosts.find(post => post.id === postId) || null;
     if (this.selectedPost) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.router.navigate(['/blog'], { queryParams: { id: postId } });
       this.cdr.detectChanges();
     }
   }
@@ -302,7 +302,7 @@ export class BlogComponent implements OnInit {
     this.selectedPost = null;
     this.cdr.detectChanges();
     setTimeout(() => {
-      this.router.navigate(['/blog']);
+      this.router.navigate(['/blog'], { queryParams: {} });
     }, 0);
   }
 
