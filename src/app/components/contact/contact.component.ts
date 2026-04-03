@@ -17,6 +17,7 @@ export class ContactComponent implements OnInit {
   isSubmitting = false;
   submitSuccess = false;
   submitError = false;
+  errorMessage = '';
 
   contactInfo = {
     email: 'lingalasuresh0606@gmail.com',
@@ -49,6 +50,7 @@ export class ContactComponent implements OnInit {
     // Reset form state when component initializes
     this.submitSuccess = false;
     this.submitError = false;
+    this.errorMessage = '';
 
     // Add animation classes after component is mounted
     setTimeout(() => {
@@ -64,6 +66,7 @@ export class ContactComponent implements OnInit {
       this.isSubmitting = true;
       this.submitSuccess = false;
       this.submitError = false;
+      this.errorMessage = '';
 
       // Get form data
       const formData = this.contactForm.value;
@@ -81,6 +84,7 @@ export class ContactComponent implements OnInit {
             console.error('Error sending email:', error);
             this.isSubmitting = false;
             this.submitError = true;
+            this.errorMessage = error?.error?.message || 'Something went wrong. Please try again later.';
           }
         });
     } else {
@@ -122,37 +126,5 @@ export class ContactComponent implements OnInit {
 
   hasFormError(): boolean {
     return this.submitError;
-  }
-
-  isEmailValid(email: string): boolean {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  }
-
-  async onSubmitForm(): Promise<void> {
-    if (this.contactForm.valid) {
-      this.isSubmitting = true;
-      this.submitSuccess = false;
-      this.submitError = false;
-
-      try {
-        console.log(this.contactForm.value,'djkghdjghdj');
-        
-        await this.http.post(`${environment.apiUrl}/api/email/send`, this.contactForm.value).toPromise();
-        this.isSubmitting = false;
-        this.submitSuccess = true;
-        this.contactForm.reset();
-      } catch (error) {
-        console.error('Error sending email:', error);
-        this.isSubmitting = false;
-        this.submitError = true;
-      }
-    } else {
-      // Mark all fields as touched to trigger validation messages
-      Object.keys(this.contactForm.controls).forEach(key => {
-        const control = this.contactForm.get(key);
-        control?.markAsTouched();
-      });
-    }
   }
 } 

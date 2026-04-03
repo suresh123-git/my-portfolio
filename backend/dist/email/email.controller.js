@@ -11,24 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var EmailController_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmailController = void 0;
 const common_1 = require("@nestjs/common");
 const email_service_1 = require("./email.service");
 const send_email_dto_1 = require("./dto/send-email.dto");
-let EmailController = class EmailController {
+let EmailController = EmailController_1 = class EmailController {
     constructor(emailService) {
         this.emailService = emailService;
+        this.logger = new common_1.Logger(EmailController_1.name);
     }
     async sendEmail(emailDto) {
         try {
+            this.logger.log(`Received contact request from ${emailDto.email} with subject "${emailDto.subject}"`);
             const success = await this.emailService.sendEmail(emailDto);
             if (!success) {
                 throw new common_1.HttpException('Failed to send email', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
             }
+            this.logger.log(`Email sent successfully for ${emailDto.email}`);
             return { message: 'Email sent successfully' };
         }
         catch (error) {
+            this.logger.error(`Email send failed for ${emailDto.email}`, error === null || error === void 0 ? void 0 : error.stack);
             throw new common_1.HttpException(error.message || 'Failed to send email', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -41,7 +46,7 @@ __decorate([
     __metadata("design:paramtypes", [send_email_dto_1.SendEmailDto]),
     __metadata("design:returntype", Promise)
 ], EmailController.prototype, "sendEmail", null);
-exports.EmailController = EmailController = __decorate([
+exports.EmailController = EmailController = EmailController_1 = __decorate([
     (0, common_1.Controller)('api/email'),
     __metadata("design:paramtypes", [email_service_1.EmailService])
 ], EmailController);

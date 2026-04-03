@@ -37,14 +37,6 @@
 
           <div class="project-actions">
             <button class="btn btn-primary" (click)="viewProject(project)">Open Details</button>
-            <a
-              *ngIf="project.links?.length"
-              class="btn btn-secondary"
-              [href]="project.links![0].url"
-              target="_blank"
-              rel="noopener noreferrer">
-              {{ project.links![0].label }}
-            </a>
           </div>
         </div>
       </article>

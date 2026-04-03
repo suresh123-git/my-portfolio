@@ -74,7 +74,7 @@
           </div>
 
           <div class="form-message error" *ngIf="submitError">
-            Something went wrong. Please try again later.
+            {{ errorMessage || 'Something went wrong. Please try again later.' }}
           </div>
         </form>
       </div>
