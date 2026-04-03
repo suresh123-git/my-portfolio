@@ -133,6 +133,29 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  deliverySignals: HighlightMetric[] = [
+    {
+      value: 'End-to-end',
+      label: 'feature ownership',
+      detail: 'Comfortable moving from UI decisions to API design and production-ready implementation.'
+    },
+    {
+      value: 'Backend-first',
+      label: 'system thinking',
+      detail: 'Strongest in service design, data flow, and architectures that stay reliable under load.'
+    },
+    {
+      value: 'Product-aware',
+      label: 'engineering delivery',
+      detail: 'I focus on workflows, business outcomes, and user journeys instead of isolated technical tasks.'
+    },
+    {
+      value: 'Quality-driven',
+      label: 'release confidence',
+      detail: 'Testing, maintainability, and measurable performance improvements are part of the work.'
+    }
+  ];
+
   capabilities: Capability[] = [
     {
       title: 'Backend systems that scale',
