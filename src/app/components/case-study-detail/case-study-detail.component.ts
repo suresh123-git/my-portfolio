@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -8,9 +8,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './case-study-detail.component.html',
-  styleUrls: ['./case-study-detail.component.scss']
+  styleUrls: ['./case-study-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class CaseStudyDetailComponent implements OnInit {
+export class CaseStudyDetailComponent implements OnInit, OnDestroy {
   @Input() caseStudy: any;
   @Input() onBack!: () => void;
 
@@ -20,8 +21,11 @@ export class CaseStudyDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Scroll to top when component is initialized
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
   }
 
   handleBack(): void {
@@ -34,5 +38,10 @@ export class CaseStudyDetailComponent implements OnInit {
 
   getSafeHtml(content: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.handleBack();
   }
 }

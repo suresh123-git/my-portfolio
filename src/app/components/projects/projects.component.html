@@ -1,48 +1,72 @@
-<!-- Projects Section -->
-<section class="projects-section">
+<section class="projects-shell">
   <div class="container">
-    <div class="section-header">
-      <h2>Projects</h2>
-      <p class="section-description">Here are some of the projects I've worked on</p>
+    <div class="page-heading fade-in">
+      <p class="section-kicker">Case Studies</p>
+      <h1>Selected Work</h1>
+      <p>
+        A closer look at the systems, product decisions, and engineering outcomes behind my recent work.
+      </p>
     </div>
 
     <div class="projects-grid">
-      <div class="project-card fade-in" *ngFor="let project of projects" [attr.data-project-id]="project.link">
+      <article *ngFor="let project of projects" class="project-card fade-in">
         <div class="project-image">
-          <img [src]="project.image" [alt]="project.title">
-          <div class="project-overlay">
-            <div class="overlay-content">
-              <!-- <h3>{{ project.subtitle }}</h3>
-              <p>{{ project.description }}</p> -->
-              <div class="tech-stack">
-                <!-- <span class="tech-tag" *ngFor="let tech of project.technologies.slice(0, 3)">{{ tech }}</span>
-                <span class="more-tech" *ngIf="project.technologies.length > 3">+{{ project.technologies.length - 3 }}</span> -->
-              </div>
-              <button class="view-project-btn" (click)="viewProject(project)">
-                <i class="material-icons">visibility</i>
-                View Project
-              </button>
+          <img [src]="project.image" [alt]="project.title" loading="lazy">
+        </div>
+
+        <div class="project-content">
+          <p class="project-subtitle">{{ project.subtitle }}</p>
+          <h2>{{ project.title }}</h2>
+          <p class="project-impact">{{ project.impact }}</p>
+          <p class="project-summary">{{ project.summary }}</p>
+
+          <div class="project-meta">
+            <div>
+              <span class="meta-label">Role</span>
+              <p>{{ project.role }}</p>
+            </div>
+            <div>
+              <span class="meta-label">Problem</span>
+              <p>{{ project.problem }}</p>
             </div>
           </div>
+
+          <div class="tag-list">
+            <span *ngFor="let tech of project.technologies">{{ tech }}</span>
+          </div>
+
+          <div class="project-actions">
+            <button class="btn btn-primary" (click)="viewProject(project)">Open Details</button>
+            <a
+              *ngIf="project.links?.length"
+              class="btn btn-secondary"
+              [href]="project.links![0].url"
+              target="_blank"
+              rel="noopener noreferrer">
+              {{ project.links![0].label }}
+            </a>
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 
-  <app-project-detail-modal 
-    *ngIf="selectedProject" 
+  <app-project-detail-modal
+    *ngIf="selectedProject"
     [project]="selectedProject"
     (close)="closeModal()">
   </app-project-detail-modal>
 </section>
 
-<!-- Get in Touch Section -->
 <section class="contact-cta">
-  <div class="container">
-    <h2 class="section-title fade-in">Let's Work Together</h2>
-    <p class="cta-description fade-in">
-      I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
-    </p>
-    <a routerLink="/contact" class="btn btn-primary fade-in">Get in Touch</a>
+  <div class="container cta-shell fade-in">
+    <div>
+      <p class="section-kicker">Hiring Signal</p>
+      <h2>Interested in someone who can own APIs, frontend delivery, and production tradeoffs?</h2>
+      <p>
+        If these projects line up with the kind of engineering work your team needs, I'd be glad to connect.
+      </p>
+    </div>
+    <a routerLink="/contact" class="btn btn-primary">Start a Conversation</a>
   </div>
-</section> 
+</section>
